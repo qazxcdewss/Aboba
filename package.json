@@ -1,0 +1,63 @@
+{
+  "name": "aboba-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "libs/*"
+  ],
+  "scripts": {
+    "dev:api": "ts-node-dev --respawn --transpile-only apps/api/src/main.ts",
+    "dev:bot": "ts-node-dev --respawn --transpile-only apps/bot/src/main.ts",
+    "dev:workers": "ts-node-dev --respawn --transpile-only apps/workers/src/main.ts",
+    "dev": "concurrently -n api,bot,workers -c green,yellow,cyan \"npm:dev:api\" \"npm:dev:bot\" \"npm:dev:workers\"",
+    "build": "tsc -b",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write .",
+    "prepare": "husky install",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev --name init",
+    "prisma:studio": "prisma studio",
+    "db:test": "ts-node scripts/db-test.ts"
+  },
+  "devDependencies": {
+    "@types/cookie": "^0.6.0",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.5.4",
+    "@types/pg": "^8.10.2",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "concurrently": "^8.2.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.0.0",
+    "lint-staged": "^15.2.0",
+    "ts-node": "^10.9.2",
+    "prettier": "^3.3.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.4.0",
+    "prisma": "^5.18.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.0",
+    "express": "^4.19.2",
+    "@prisma/client": "^5.18.0",
+    "cookie": "^0.6.0",
+    "@aws-sdk/client-s3": "^3.637.0",
+    "@aws-sdk/s3-presigned-post": "^3.637.0",
+    "bullmq": "^5.7.14",
+    "ioredis": "^5.4.1",
+    "pg": "^8.11.5"
+  },
+  "prisma": {
+    "schema": "./prisma/schema.prisma"
+  },
+  "lint-staged": {
+    "**/*.{ts,js}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  }
+}
+
+

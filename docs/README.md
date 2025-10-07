@@ -58,13 +58,13 @@ ADR файлы формируют **архитектурный скелет си
 
 ```
 /docs
-  ├── whitepaper.md              # Aboba Whitepaper V3 (Source of Truth)
-  ├── db_spec_v0.1.md             # Database Spec (Approved)
+  ├── aboba_whitepaper.md         # Aboba Whitepaper (Source of Truth)
+  ├── db_spec_v_0_1.md            # Database Spec (Approved)
   ├── adr/
-  │    ├── ADR-001.md               # Архитектура процессов и событий
-  │    ├── ADR-002.md               # Модульные границы и контракты
+  │    ├── adr_001_архитектурный_стиль_и_процессы_обновлённый.md
+  │    ├── adr_002_границы_и_контракты.md
   │    ├── ...
-  │    ├── ADR-010.md               # AI Moderation Engine
+  │    ├── adr_010_ai_moderation_engine.md
   └── README.md                     # (текущий документ)
 ```
 

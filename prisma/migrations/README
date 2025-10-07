@@ -1,0 +1,5 @@
+Migrations are applied via docker to avoid Windows env issues.
+Use:
+docker run --rm --network aboba_default -v ${PWD}:/app -w /app -e DATABASE_URL="postgres://aboba:aboba@postgres:5432/aboba?schema=public" node:22 npx prisma@5.22.0 migrate dev --name <name>
+
+
