@@ -218,3 +218,34 @@ model ProfilePrice {
 }
 
 
+// Moderation (ADR-005/009)
+model ModerationTask {
+  id         BigInt   @id @default(autoincrement())
+  profileId  BigInt   @map("profile_id")
+  kind       String   @db.Text // e.g., 'profile_full'
+  status     String   @default("open") @db.Text
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @default(now()) @map("updated_at")
+
+  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  decisions ModerationDecision[]
+
+  @@index([profileId, status])
+  @@map("moderation_tasks")
+}
+
+model ModerationDecision {
+  id          BigInt   @id @default(autoincrement())
+  taskId      BigInt   @map("task_id")
+  decision    String   @db.Text // 'approved' | 'needs_fix' | 'rejected'
+  reasonCode  String?  @map("reason_code") @db.Text
+  notes       String?  @db.Text
+  decidedAt   DateTime @default(now()) @map("decided_at")
+  decidedByTg String?  @map("decided_by_tg") @db.Text
+
+  task ModerationTask @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@index([taskId])
+  @@map("moderation_decisions")
+}
+
