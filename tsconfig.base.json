@@ -12,7 +12,9 @@
     "paths": {
       "@shared/*": ["libs/shared/src/*"]
     },
-    "outDir": "dist"
+    "outDir": "dist",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "include": ["apps", "libs", "scripts"],
   "exclude": ["node_modules", "dist"]

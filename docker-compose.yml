@@ -8,6 +8,9 @@ services:
       DATABASE_URL: postgres://aboba:aboba@postgres:5432/aboba?schema=public
       REDIS_HOST: redis
       REDIS_PORT: 6379
+      S3_ENDPOINT: http://minio:9000
+      S3_BUCKET_ORIGINAL: aboba-media-original
+      S3_BUCKET_DERIVED: aboba-media-derived
     ports:
       - '3001:3000'
     volumes:
@@ -27,6 +30,7 @@ services:
       - '5432:5432'
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./:/app:ro
 
   redis:
     image: redis:7
@@ -41,6 +45,11 @@ services:
     environment:
       REDIS_HOST: redis
       REDIS_PORT: 6379
+      DATABASE_URL: postgres://aboba:aboba@postgres:5432/aboba?schema=public
+      PRISMA_IGNORE_ENV_FILES: "true"
+      S3_ENDPOINT: http://minio:9000
+      S3_BUCKET_ORIGINAL: aboba-media-original
+      S3_BUCKET_DERIVED: aboba-media-derived
     depends_on:
       - redis
     volumes:

@@ -7,7 +7,7 @@
     "libs/*"
   ],
   "scripts": {
-    "dev:api": "ts-node-dev --respawn --transpile-only apps/api/src/main.ts",
+    "dev:api": "ts-node-dev --respawn --transpile-only apps/api/src/main.nest.ts",
     "dev:bot": "ts-node-dev --respawn --transpile-only apps/bot/src/main.ts",
     "dev:workers": "ts-node-dev --respawn --transpile-only apps/workers/src/main.ts",
     "dev": "concurrently -n api,bot,workers -c green,yellow,cyan \"npm:dev:api\" \"npm:dev:bot\" \"npm:dev:workers\"",
@@ -41,6 +41,11 @@
   "dependencies": {
     "dotenv": "^16.4.0",
     "express": "^4.19.2",
+    "@nestjs/common": "^10.3.10",
+    "@nestjs/core": "^10.3.10",
+    "@nestjs/platform-express": "^10.3.10",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.8.1",
     "@prisma/client": "^5.18.0",
     "cookie": "^0.6.0",
     "@aws-sdk/client-s3": "^3.637.0",

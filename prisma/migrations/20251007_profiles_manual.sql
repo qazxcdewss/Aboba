@@ -1,18 +1,18 @@
 -- Create Profile table according to Prisma model
-CREATE TABLE IF NOT EXISTS "Profile" (
+CREATE TABLE IF NOT EXISTS profiles (
   id BIGSERIAL PRIMARY KEY,
-  "userId" BIGINT NOT NULL,
+  user_id BIGINT NOT NULL,
   status TEXT NOT NULL DEFAULT 'draft',
   nickname TEXT NOT NULL,
-  "isVisible" BOOLEAN NOT NULL DEFAULT FALSE,
-  "publishedAt" TIMESTAMPTZ NULL,
-  "expiresAt" TIMESTAMPTZ NULL,
-  "createdAt" TIMESTAMPTZ NOT NULL DEFAULT now(),
-  "updatedAt" TIMESTAMPTZ NOT NULL DEFAULT now()
+  is_visible BOOLEAN NOT NULL DEFAULT FALSE,
+  published_at TIMESTAMPTZ NULL,
+  expires_at TIMESTAMPTZ NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-ALTER TABLE "Profile"
+ALTER TABLE profiles
   ADD CONSTRAINT profile_user_fk
-  FOREIGN KEY ("userId") REFERENCES "User"(id) ON DELETE RESTRICT;
+  FOREIGN KEY (user_id) REFERENCES "User"(id) ON DELETE RESTRICT;
 
-CREATE INDEX IF NOT EXISTS idx_profile_user_status ON "Profile"("userId", status);
+CREATE INDEX IF NOT EXISTS idx_profile_user_status ON profiles(user_id, status);
